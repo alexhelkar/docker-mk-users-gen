@@ -1,0 +1,7 @@
+{
+    "require": {
+        "fzaninotto/faker": "^1.6",
+        "guzzlehttp/guzzle": "^6.2",
+        "symfony/console": "^3.0"
+    }
+}

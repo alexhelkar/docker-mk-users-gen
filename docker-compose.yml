@@ -1,0 +1,29 @@
+version: '2'
+services:
+  redis:
+    image: redis
+
+  generator:
+    build: ./php-users-generator
+    command: "users:generate --seconds 300"
+    image: alexhelkar/php-users-generator
+
+  webserver:
+    build: ./webserver
+    image: alexhelkar/mk-webserver
+    ports:
+      - 80
+
+  tracker:
+    build: ./php-users-tracker
+    expose:
+      - 9000
+
+  ui:
+    build: ./php-users-tracker-ui
+    image: alexhelkar/php-users-tracker-ui
+    ports:
+      - 80:80
+    command: php -S 0.0.0.0:80 -t /app/
+    volumes:
+      - ./php-users-tracker-ui/:/app/
